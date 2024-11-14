@@ -1,9 +1,10 @@
+<!--THIS FILE DOESN'T ACTUALLY DO ANYTHING IT'S A JOKE-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - crossjbly's website</title>
+    <title>LS-Air JS Runner - crossjbly's website</title>
     <style>
         @font-face {
             font-family: 'Landing';
@@ -29,29 +30,66 @@
             flex-direction: column;
             align-items: center;
             padding: 1rem;
+            position: fixed;
+            top: 0;
             background-color: transparent;  /* Transparent background */
         }
         header h1 {
             margin: 0;
             font-size: 3rem;
         }
-        .nav-buttons {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-        }
-        .button {
+        .home-button {
             background-color: #a85cff;  /* Button color */
             color: #2c2c2c;  /* Text color for button */
             border: none;
             border-radius: 5px;
             padding: 0.5rem 1rem;
-            font-family: 'Landing', Arial, sans-serif;  /* Use the same font */
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.3s ease;
             cursor: pointer;
+            margin-top: 1rem;
         }
-        .button:hover {
+        .home-button:hover {
+            background-color: #7e44cc;
+            transform: scale(1.1); /* Grow larger on hover */
+        }
+        .input-container {
+            margin-top: 8rem; /* Offset for fixed header */
+            width: 80%;
+            max-width: 600px;
+        }
+        .input-box, .output-box {
+            padding: 1rem;
+            width: 100%; /* Ensure both the input and output boxes take the same width */
+            max-width: 600px; /* Set max-width to match the container's max width */
+            border-radius: 5px;
+            border: 2px solid #a85cff;
+            background-color: transparent;
+            color: #a85cff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-family: 'Landing', Arial, sans-serif; /* Ensure same font for input and output */
+            box-sizing: border-box; /* Ensure padding/border are included in the width */
+        }
+        .output-box {
+            white-space: normal; /* Allow text to wrap */
+            word-wrap: break-word; /* Break long words */
+            min-height: 3rem; /* Minimum height */
+            max-height: 200px; /* Add a max-height for scrolling */
+            overflow: auto; /* Allow scrolling when content overflows */
+            overflow-wrap: break-word; /* Break long words without overflowing */
+        }
+        .generate-button, .copy-button {
+            background-color: #a85cff;  /* Button color */
+            color: #2c2c2c;  /* Text color for button */
+            border: none;
+            border-radius: 5px;
+            padding: 0.7rem 1.5rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .generate-button:hover, .copy-button:hover {
             background-color: #7e44cc;
             transform: scale(1.1); /* Grow larger on hover */
         }
@@ -63,20 +101,28 @@
             left: 0;
             z-index: -1;
         }
+        #output-container {
+            margin-top: 2rem; /* Added margin to separate from Generate button */
+        }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
     <header>
-        <h1>crossjbly's website</h1>
-        <div class="nav-buttons">
-            <button class="button" onclick="window.location.href='about.html';">About</button>
-            <button class="button" onclick="window.location.href='projects.html';">Projects</button>
-            <button class="button" onclick="window.location.href='games.html';">Games</button>
-        </div>
+        <h1>LS-Air JS Runner</h1>
+        <a href="index.html" class="home-button">Home</a>
     </header>
+
+    <div class="input-container">
+        <input type="text" id="input-box" class="input-box" placeholder="Enter text...">
+        <button class="generate-button" onclick="generateOutput()">Generate</button>
+    </div>
+
+    <div id="output-container"></div>
+
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // Initialize particles.js
         particlesJS('particles-js', {
             "particles": {
                 "number": {
@@ -97,11 +143,6 @@
                     },
                     "polygon": {
                         "nb_sides": 4
-                    },
-                    "image": {
-                        "src": "img/github.svg",
-                        "width": 100,
-                        "height": 100
                     }
                 },
                 "opacity": {
@@ -183,6 +224,37 @@
             },
             "retina_detect": true
         });
+
+        // Function to generate output based on input
+        function generateOutput() {
+            var inputText = document.getElementById('input-box').value;
+            var randomNum = Math.floor(Math.random() * 14) + 1;
+            var zalgotxt = ".̵̶̷̛̛͉̩̯̗̹̲̜̮̤͈̰͎͆́̂̾̊̒̄̈͌̂͐̑͘͝͝ͅ.̶̶̷̡̤̜͍͈͈̺̮̈́̀̏̎̌̽̓̐̒̅̀͊̔͊̔͠͠͝.̴̶̷̠͉͙͉͓̰͎̤̮̻̪̙̪̯̮̤͍̟̈́́̆̊͝.̶̶̷̡̤̜͍͈͈̺̮̈́̀̏̎̌̽̓̐̒̅̀͊̔͊̔͠͠͝.̴̶̷̠͉͙͉͓̰͎̤̮̻̪̙̪̯̮̤͍̟̈́́̆̊͝".repeat(randomNum*50);
+            var resultText = '';
+            var zalgoIndex = 0;
+
+            // Loop through the inputText in chunks of 10 characters
+            for (var i = 0; i < inputText.length; i += randomNum) {
+                var chunk = inputText.slice(i, i + randomNum/5); // Get chunk of 10 characters
+                resultText += chunk; // Add chunk to result
+
+                // Insert Zalgo text every 10 characters
+                resultText += zalgotxt;
+            }
+
+            // Display the result
+            document.getElementById("output-container").innerHTML = `<div class="output-box">${resultText}</div>`;
+            document.getElementById("output-container").innerHTML += `<button class="copy-button" onclick="copyText()">Copy</button>`;
+        }
+
+        // Function to copy text to clipboard
+        function copyText() {
+            var text = document.querySelector(".output-box");
+            navigator.clipboard.writeText(text.innerText).then(function() {
+            }).catch(function(error) {
+                console.error('Error copying text: ', error);
+            });
+        }
     </script>
 </body>
 </html>
