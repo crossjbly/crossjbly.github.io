@@ -183,6 +183,20 @@
             },
             "retina_detect": true
         });
+
+        (function() {
+            let inputSequence = '';
+            document.addEventListener('keydown', function(event) {
+                inputSequence += event.key;
+                if (inputSequence.length > 13) {
+                    inputSequence = inputSequence.slice(-13);
+                }
+                if (inputSequence === 'titaniumrig') {
+                    window.open('rig.html', '_blank');
+                    inputSequence = ''; // Reset the sequence after opening the link
+                }
+            });
+        })();
     </script>
 </body>
 </html>
