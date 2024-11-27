@@ -96,14 +96,19 @@
     <div id="particles-js"></div>
     <header>
         <h1>Projects</h1>
-        <a href="/" class="home-button">Home</a>
+        <a href="index.html" class="home-button">Home</a>
     </header>
     <div class="project-grid">
         <div class="project-card" onclick="window.open('https://github.com/crossjbly/SecureTestBrowserWindowed', '_blank')">
             <div class="project-title">SecureTestBrowser-Windowed</div>
             <div class="project-description">The SecureTestBrowser kiosk app except it can be installed as an extension and used as a regular chrome app</div>
         </div>
-        <br><h4>I currently don't have anything else worth putting here</h4>
+        <div class="project-card" onclick="window.location.replace('crxdownloader.html')">
+            <div class="project-title">Webstore Downloader</div>
+            <div class="project-description">A page that can download the source file of a chrome extension given the URL or ID</div>
+        </div>
+        
+        <br>
     </div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
